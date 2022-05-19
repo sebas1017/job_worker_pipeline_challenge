@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  pipeline_api_challenge:
+      build: ./pipeline_challenge
+      ports:
+          - 8000:8000
+      volumes:
+          - ./pipeline_challenge:/src
+      container_name: pipeline_api_challenge
+
+  job_manager:
+    build: ./job_manager
+    ports:
+      - 8220:8220
+    volumes:
+      - ./job_manager:/src
+    container_name: job_manager
+  
+  job_worker:
+    restart: always
+    build: ./job_worker
+    volumes:
+      - ./job_worker:/src
+    ports:
+      - 8221:8221
+    depends_on: 
+      - job_manager
+    links:
+      - job_manager
+    container_name: job_worker

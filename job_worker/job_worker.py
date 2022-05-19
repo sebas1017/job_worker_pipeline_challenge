@@ -5,16 +5,16 @@ import uvicorn
 import os
 server = FastAPI()
 
-environment = "PROD" #CA:MBIAR A DEV SI DESEA LOCALHOST
+environment = "DEV" #CA:MBIAR A DEV SI DESEA LOCALHOST
 if environment == "PROD":
     manager_host='https://manager-pipeline-challenge.herokuapp.com'
     manager_port=443
     api_url="https://api-challenge-pipeline.herokuapp.com"
     api_port=443
 else:
-    manager_host='0.0.0.0'
+    manager_host='http://job_manager'
     manager_port=8220
-    api_url="http://localhost:8000"
+    api_url="http://pipeline_api_challenge:8000"
 
 
 
